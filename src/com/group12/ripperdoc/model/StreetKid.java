@@ -5,4 +5,9 @@ public class StreetKid extends BaseHuman {
     public StreetKid(String name) {
         super(name, "Street Kid", 40, 45, 30, 20, 95);
     }
+
+    @Override
+    public Human copy() {
+        return new StreetKid(getName());
+    }
 }

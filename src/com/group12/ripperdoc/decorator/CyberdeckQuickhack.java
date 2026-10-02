@@ -30,4 +30,9 @@ public class CyberdeckQuickhack extends ImplantDecorator {
     public int getHumanity() {
         return wrapped.getHumanity() - 15;
     }
+
+    @Override
+    protected ImplantDecorator recreate(Human inner) {
+        return new CyberdeckQuickhack(inner);
+    }
 }

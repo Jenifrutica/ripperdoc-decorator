@@ -35,4 +35,9 @@ public class GorillaArms extends ImplantDecorator {
     public int getHumanity() {
         return wrapped.getHumanity() - 14;
     }
+
+    @Override
+    protected ImplantDecorator recreate(Human inner) {
+        return new GorillaArms(inner);
+    }
 }

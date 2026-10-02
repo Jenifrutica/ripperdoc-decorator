@@ -35,4 +35,9 @@ public class OpticalCamo extends ImplantDecorator {
     public int getHumanity() {
         return wrapped.getHumanity() - 12;
     }
+
+    @Override
+    protected ImplantDecorator recreate(Human inner) {
+        return new OpticalCamo(inner);
+    }
 }

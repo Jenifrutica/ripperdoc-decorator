@@ -15,4 +15,6 @@ public interface Human {
     int getHumanity();
 
     int getCost();
+
+    Human copy();
 }

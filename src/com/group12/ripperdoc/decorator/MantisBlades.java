@@ -35,4 +35,9 @@ public class MantisBlades extends ImplantDecorator {
     public int getHumanity() {
         return wrapped.getHumanity() - 18;
     }
+
+    @Override
+    protected ImplantDecorator recreate(Human inner) {
+        return new MantisBlades(inner);
+    }
 }

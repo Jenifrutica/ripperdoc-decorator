@@ -12,10 +12,10 @@ Decorator, Prototype, Builder y Abstract Factory.
 
 ## Demo en vivo
 
-> **Link funcional:** _(pendiente) `https://<id>.lambda-url.<region>.on.aws/`_
->
-> El despliegue objetivo es **AWS Lambda + Function URL** (capa gratuita). Ver
-> [Despliegue](#despliegue-aws-lambda) para lo que falta.
+**Link funcional:** https://qjvm0n3jxk.execute-api.us-east-1.amazonaws.com
+
+Desplegado en **AWS Lambda** (Java 21) y expuesto con **API Gateway HTTP API**, dentro de
+la capa gratuita. Para correrlo en local, ver [Cómo correrlo](#cómo-correrlo).
 
 ---
 

@@ -600,6 +600,7 @@ pre {
 }
 
 .stat__fill {
+  display: block;
   height: 100%;
   width: 0%;
   background: linear-gradient(90deg, var(--muted), var(--ink));

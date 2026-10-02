@@ -104,7 +104,9 @@ public class ApiRouter {
             map.put("id", preset.id());
             map.put("name", preset.name());
             map.put("description", preset.description());
-            map.put("chain", preset.descriptionChain());
+            map.put("chain", preset.chain());
+            map.put("lifepathId", preset.lifepathId());
+            map.put("implantIds", preset.implantIds());
             list.add(map);
         }
         return Json.write(list);
@@ -132,7 +134,7 @@ public class ApiRouter {
                 for (String part : raw.split(",")) {
                     String trimmed = part.trim();
                     if (!trimmed.isEmpty()) {
-                        builder.install(trimmed);
+                        builder.install(findImplant(trimmed));
                         count++;
                     }
                 }
@@ -173,6 +175,16 @@ public class ApiRouter {
         root.put("layers", List.of(layer));
         root.put("source", "preset");
         return ApiResponse.json(200, Json.write(root));
+    }
+
+    private Implant findImplant(String id) {
+        return catalog.findImplant(id)
+                .or(() -> factoryRegistry.list().stream()
+                        .flatMap(factory -> java.util.stream.Stream.of(
+                                factory.operatingSystem(), factory.arms(), factory.optics()))
+                        .filter(product -> product.id().equals(id))
+                        .findFirst())
+                .orElseThrow(() -> new IllegalArgumentException("Unknown implant: " + id));
     }
 
     private static Map<String, Object> product(Implant implant) {

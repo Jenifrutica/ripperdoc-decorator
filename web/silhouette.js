@@ -1,6 +1,6 @@
 (function () {
   const SLOT_ANCHORS = {
-    FACE: { x: 180, y: 72, side: "right" },
+    FACE: { x: 180, y: 72, side: "right", labelY: 28 },
     NERVOUS_SYSTEM: { x: 180, y: 150, side: "left" },
     OPERATING_SYSTEM: { x: 180, y: 202, side: "right" },
     ARMS: { x: 96, y: 244, side: "left" },
@@ -113,18 +113,19 @@
       group.appendChild(dot);
 
       const labelX = anchor.side === "left" ? anchor.x - 12 : anchor.x + 12;
+      const labelY = anchor.labelY !== undefined ? anchor.labelY : anchor.y - 13;
       const anchorAttr = anchor.side === "left" ? "end" : "start";
       const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
       line.setAttribute("x1", anchor.x);
       line.setAttribute("y1", anchor.y);
       line.setAttribute("x2", labelX);
-      line.setAttribute("y2", anchor.y - 10);
+      line.setAttribute("y2", labelY + 3);
       line.setAttribute("class", "node__line");
       group.appendChild(line);
 
       const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
       label.setAttribute("x", labelX);
-      label.setAttribute("y", anchor.y - 13);
+      label.setAttribute("y", labelY);
       label.setAttribute("text-anchor", anchorAttr);
       label.setAttribute("class", "node__label");
       label.textContent = implant.name;

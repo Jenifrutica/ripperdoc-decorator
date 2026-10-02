@@ -20,7 +20,13 @@ import java.util.Optional;
 
 public class PresetRegistry {
 
-    public record Preset(String id, String name, String description, String descriptionChain) {
+    public record Preset(
+            String id,
+            String name,
+            String description,
+            String chain,
+            String lifepathId,
+            List<String> implantIds) {
     }
 
     private final Map<String, Human> prototypes = new LinkedHashMap<>();
@@ -28,18 +34,23 @@ public class PresetRegistry {
 
     public PresetRegistry() {
         register("street-samurai", "Street Samurai", "Mantis blades, boosted nerves and bone plating.",
+                "street-kid", List.of("mantis-blades", "kerenzikov", "subdermal-armor"),
                 new SubdermalArmor(new KerenzikovReflex(new MantisBlades(new StreetKid("Samurai")))));
         register("netrunner", "Netrunner", "A corpo deck and chrome optics for deep dives.",
+                "corpo", List.of("cyberdeck", "kiroshi-optics"),
                 new KiroshiOptics(new CyberdeckQuickhack(new Corpo("Runner"))));
         register("solo", "Solo", "Gorilla arms and a Sandevistan for front-line work.",
+                "nomad", List.of("gorilla-arms", "sandevistan", "subdermal-armor"),
                 new SubdermalArmor(new Sandevistan(new GorillaArms(new Nomad("Solo")))));
         register("ghost", "Ghost", "Optical camo and a Kerenzikov. You never saw them.",
+                "street-kid", List.of("optical-camo", "kiroshi-optics", "kerenzikov"),
                 new KerenzikovReflex(new KiroshiOptics(new OpticalCamo(new StreetKid("Ghost")))));
     }
 
-    private void register(String id, String name, String description, Human prototype) {
+    private void register(String id, String name, String description, String lifepathId,
+                          List<String> implantIds, Human prototype) {
         prototypes.put(id, prototype);
-        metadata.put(id, new Preset(id, name, description, prototype.getDescription()));
+        metadata.put(id, new Preset(id, name, description, prototype.getDescription(), lifepathId, implantIds));
     }
 
     public List<Preset> list() {

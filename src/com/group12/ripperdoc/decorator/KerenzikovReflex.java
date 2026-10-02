@@ -30,4 +30,9 @@ public class KerenzikovReflex extends ImplantDecorator {
     public int getHumanity() {
         return wrapped.getHumanity() - 10;
     }
+
+    @Override
+    protected ImplantDecorator recreate(Human inner) {
+        return new KerenzikovReflex(inner);
+    }
 }

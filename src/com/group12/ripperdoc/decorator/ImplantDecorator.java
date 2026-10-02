@@ -14,6 +14,13 @@ public abstract class ImplantDecorator implements Human {
 
     public abstract int getPrice();
 
+    protected abstract ImplantDecorator recreate(Human inner);
+
+    @Override
+    public Human copy() {
+        return recreate(wrapped.copy());
+    }
+
     @Override
     public String getDescription() {
         return wrapped.getDescription() + " + " + getImplantName();

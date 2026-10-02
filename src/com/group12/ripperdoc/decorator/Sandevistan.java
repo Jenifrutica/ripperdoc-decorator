@@ -30,4 +30,9 @@ public class Sandevistan extends ImplantDecorator {
     public int getHumanity() {
         return wrapped.getHumanity() - 25;
     }
+
+    @Override
+    protected ImplantDecorator recreate(Human inner) {
+        return new Sandevistan(inner);
+    }
 }

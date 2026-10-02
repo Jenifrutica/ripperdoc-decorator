@@ -35,4 +35,9 @@ public class KiroshiOptics extends ImplantDecorator {
     public int getHumanity() {
         return wrapped.getHumanity() - 6;
     }
+
+    @Override
+    protected ImplantDecorator recreate(Human inner) {
+        return new KiroshiOptics(inner);
+    }
 }
